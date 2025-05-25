@@ -151,6 +151,8 @@ public:
     }
 };
 
+// Regular city car
+
 class Car : public Transport {
 public:
     Car(string n) : Transport(n, 140, 0.7, 1.3) {}
@@ -165,6 +167,8 @@ public:
     }
 };
 
+// Represents a city citizen
+
 class Citizen : public CityObject {
     int happiness;
 public:
@@ -172,6 +176,9 @@ public:
     void displayInfo() const override {
         cout << BLUE << "Citizen: " << name << ", Happiness: " << happiness << "\n";
     }
+
+// Citizen performing an activity increases happiness
+
     void participate(const string& activity) {
         cout << CYAN << name << " is doing " << activity << ".\n" << RESET;
         happiness += 5;
@@ -181,10 +188,14 @@ public:
     }
 };
 
+// Base class for renewable/nonrenewable power sources
+
 class PowerSource : public CityObject {
 public:
     PowerSource(string n) : CityObject(n) {}
 };
+
+// Solar power plant
 
 class SolarPlant : public PowerSource {
 public:
@@ -197,6 +208,8 @@ public:
     }
 };
 
+// Coal-Based Power Plant
+
 class CoalPlant : public PowerSource {
 public:
     CoalPlant(string n) : PowerSource(n) {}
@@ -208,11 +221,15 @@ public:
     }
 };
 
+// Abstract class for activities performed by citizens
+
 class Activity {
 public:
     virtual void execute(Citizen& c) = 0;
     virtual ~Activity() {}
 };
+
+// Concrete activities
 
 class TreePlanting : public Activity {
 public:
@@ -241,6 +258,8 @@ public:
         c.participate("Walking");
     }
 };
+
+// Template log class for storing activity logs and exporting them
 
 template <typename T>
 class Log {
@@ -292,6 +311,8 @@ public:
     }
 };
 
+// Custom exception for building upgrade budget errors
+
 class UpgradeException : public exception {
 public:
     const char* what() const noexcept override {
@@ -317,8 +338,9 @@ int main() {
 
     int totalCOX = 0;
     double totalSOX = 0.0, totalNOX = 0.0;
-
+    
     while (running) {
+ // Interactive Menu 
         cout << BLUE << "\n--- Smart Eco City ---\n" << RESET;
         cout <<GREEN<< "1. Add Building\n2. Add Bus\n3. Add Citizen\n4. Add Power Source\n";
         cout << "5. Show All Objects\n6. Upgrade Building\n7. Add Car and Drive\n";
@@ -529,8 +551,8 @@ int main() {
         }
     }
 
-
-    for (int i = 0; i < bCount; ++i) delete buildings[i];
+// Dynamic Memory Clean-up . 
+    for (int i = 0; i < bCount; ++i) delete buildings[i]; 
     for (int i = 0; i < tCount; ++i) delete transports[i];
     for (int i = 0; i < cCount; ++i) delete citizens[i];
     for (int i = 0; i < pCount; ++i) delete powers[i];
