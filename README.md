@@ -46,7 +46,7 @@ File I/O for persistent logging
 ANSI escape codes for terminal colors
 
 # Project Structure
-main.cpp — Core simulation with menu and interaction logic
+Smart_Eco_City_Simulation.cpp — Core simulation with menu and interaction logic
 
 Classes for Buildings, Transport, Citizens, PowerSources, Activities
 
