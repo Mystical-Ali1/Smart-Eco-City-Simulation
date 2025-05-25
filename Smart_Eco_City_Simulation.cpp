@@ -5,6 +5,7 @@
 #include <iomanip> 
 using namespace std;
 
+// ANSI color codes for colorful terminal output
 
 #define RED     "\033[31m"
 #define GREEN   "\033[32m"
@@ -13,11 +14,15 @@ using namespace std;
 #define CYAN    "\033[36m"
 #define RESET   "\033[0m"
 
+// Constants for object limits
+
 const int MAX_LOGS = 10;
 const int MAX_CITIZENS = 5;
 const int MAX_BUILDINGS = 5;
 const int MAX_TRANSPORTS = 5;
 const int MAX_POWER = 5;
+
+// Function to display total emissions collected so far
 
 void showTotalEmissions(int totalCOX, double totalSOX, double totalNOX) {
     cout << fixed << setprecision(2);
@@ -38,6 +43,8 @@ public:
     virtual ~CityObject() {}
 };
 
+// Base class for all types of buildings
+
 class Building : public CityObject {
 protected:
     int energyConsumption;
@@ -47,6 +54,9 @@ public:
         cout << name << " is operating as a generic building.\n";
     }
 };
+
+
+// Residential building
 
 class Residential : public Building {
 public:
@@ -60,6 +70,8 @@ public:
     }
 };
 
+// Commercial building
+
 class Commercial : public Building {
 public:
     Commercial(string n, int energy) : Building(n, energy) {}
@@ -70,6 +82,8 @@ public:
         cout << YELLOW << "Commercial: " << name << ", Energy: " << energyConsumption << " kWh\n"<< RESET;
     }
 };
+
+// Base transport class with emission tracking
 
 class Transport : public CityObject {
 protected:
@@ -85,6 +99,9 @@ public:
     virtual void displayInfo() const override {
         cout << "Transport: " << name << "\n";
     }
+
+    
+// Emission calculator for any transport
 
     void calculateEmissions(int kmDriven, int& totalCOX, double& totalSOX, double& totalNOX) {
         int cox = COXemissionRate * kmDriven;
@@ -102,6 +119,8 @@ public:
     }
 };
 
+// Emission-free electric bus
+
 class ElectricBus : public Transport {
 public:
     ElectricBus(string n) : Transport(n, 0, 0.0, 0.0) {}
@@ -115,6 +134,8 @@ public:
         cout << BLUE<< "Electric Bus: " << name << "\n"<<RESET;
     }
 };
+
+// Diesel-powered bus
 
 class DieselBus : public Transport {
 public:
@@ -514,6 +535,6 @@ int main() {
     for (int i = 0; i < cCount; ++i) delete citizens[i];
     for (int i = 0; i < pCount; ++i) delete powers[i];
 
-    cout << GREEN << "Exiting Smart Eco City Simulation. Goodbye!\n" << RESET;
+    cout << GREEN << "Exiting Smart Eco City Simulation. Goodbye!\n" << RESET; 
     return 0;
 }
